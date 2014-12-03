@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
 	private OutDialog outro;
 	private String name;
 	private long score=0;
-	private final Dimension backgroundSz = new Dimension(1024,768);
+	private static final Dimension backgroundSz = new Dimension(1024,768);
 	private boolean kLeft=false;
 	private boolean kRight=false;
 	private boolean kSpace=false;
@@ -158,13 +158,13 @@ public class GamePanel extends JPanel {
 								bullet[i].getAmmoY());
 				for(int i=0;i<=bindex;i++)
 				{
-					if(bullet[i].getAmmoY()>=600)
+					if(bullet[i].getAmmoY()>=backgroundSz.height)
 						bullet[i].setFriendlyFire(false);
 					if(bullet[i].getAmmoY()<=0)
 						{bullet[i].setFriendlyFire(true);bullet[i].setFireMotion(false);}
 				}
 				//TODO there is a bug which cases all bullets to erase if last bullet is fired
-				if(bullet[bindex].getAmmoY()<=0|| bullet[bindex].getAmmoY()>=600)
+				if(bullet[bindex].getAmmoY()<=0|| bullet[bindex].getAmmoY()>=backgroundSz.height)
 				{
 					bullet[bindex].setFireMotion(false);
 					boolean stop =true;
@@ -205,7 +205,7 @@ public class GamePanel extends JPanel {
 			}
 		}
 	}
-	public Dimension getBackgroundDimension(){return backgroundSz;}
+	public static Dimension getBackgroundDimension(){return backgroundSz;}
 	private void calculateScore()
 	{
 		score+=10;
@@ -225,7 +225,7 @@ public class GamePanel extends JPanel {
 		if(sh.getX()>=0)
 			if(kLeft)
 				sh.setX(sh.getX()-2);
-		if(sh.getX()<=(600-sh.getWitdh()))
+		if(sh.getX()<=(backgroundSz.width-sh.getWitdh()))
 			if(kRight)
 				sh.setX(sh.getX()+2);
 		if(kCtrl){fireSecret=false;}

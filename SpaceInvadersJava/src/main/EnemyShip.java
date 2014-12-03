@@ -25,7 +25,7 @@ public class EnemyShip extends Ship{
 	{
 		super(enemyShip);
 		imgX = enemyShip.getIconWidth();imgY=enemyShip.getIconHeight();
-		x=rand.nextInt(600-imgX);y=3;moveY=1;flightPattern(false);
+		x=rand.nextInt(GamePanel.getBackgroundDimension().width-imgX);y=3;moveY=1;flightPattern(false);
 		time = new Timer(25,new TimeListener());
 		limit=400;
 		time.start();
@@ -96,7 +96,7 @@ public class EnemyShip extends Ship{
 		public void actionPerformed(ActionEvent e) {
 			setY(getY()+getMoveY());
 			setX(getX()+getMoveX());
-			if(((x+enemyShip.getIconWidth())>= 600)||x<=0) flightPattern(true);
+			if(((x+enemyShip.getIconWidth())>= GamePanel.getBackgroundDimension().width)||x<=0) flightPattern(true);
 			//with small problem of abrupt change of flight pattern (to be fixed)
 			//if(rand.nextInt(400)==ticker) setMoveX(getMoveX()*(-1));
 			if(ticker>=limit){ticker=0;setFireModeOn();}
