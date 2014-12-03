@@ -37,7 +37,7 @@ public class GamePanel extends JPanel {
 	private boolean fireSecret=false;
 	private int currentLevel,nextLevel,fireSpeed,threshold;
 	private OutDialog outro;
-	private final ImageIcon backgroundImg = new ImageIcon("image/Background.png");
+	private final ImageIcon backgroundImg = new ImageIcon("image/back.PNG");
 	private String name;
 	private long score=0;
 	private static final Dimension backgroundSz = new Dimension(1024,768);
@@ -146,8 +146,8 @@ public class GamePanel extends JPanel {
 	{
 		super.paintComponent(g);
 		if(!GameOver&&!GameStart){
-			backgroundImg.paintIcon(this, g, backgroundImg.getIconWidth(), 
-									backgroundImg.getIconHeight());
+			backgroundImg.paintIcon(this, g, backgroundSz.width, 
+									backgroundSz.height);
 			sh.getImage().paintIcon(this, g, sh.getX(), sh.getY());
 			for(int i =0;i<eindex;i++)
 				if(enemy[i].isAlive()){
