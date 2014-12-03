@@ -1,0 +1,8 @@
+Please make sure you will be hosting the project using SVN. Some prefferd sites :
+1) assembla.com
+2) sourceforge.com
+3) code.google.com
+4) https://projectlocker.com/signup/startup
+
+Alternative order storage hosting or VPS (Virtual Private Server) and build a SVN there.
+
