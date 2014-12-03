@@ -14,7 +14,7 @@ public class MyShip extends Ship {
 	public MyShip()
 	{
 		super(ship);
-		x=250;y=(GamePanel.getBackgroundDimension().height-ship.getIconHeight());moveX=0;
+		x=250;y=((GamePanel.getBackgroundDimension().height-100)-ship.getIconHeight());moveX=0;
 		life=3;
 	}
 	public void setX(int x){this.x=x;}
