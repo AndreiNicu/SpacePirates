@@ -6,14 +6,21 @@ package main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
+import java.text.AttributedCharacterIterator;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -37,7 +44,7 @@ public class GamePanel extends JPanel {
 	private boolean fireSecret=false;
 	private int currentLevel,nextLevel,fireSpeed,threshold;
 	private OutDialog outro;
-	private final ImageIcon backgroundImg = new ImageIcon("image/back.PNG");
+	private ImageIcon backgroundImg = new ImageIcon("image/back.PNG");
 	private String name;
 	private long score=0;
 	private static final Dimension backgroundSz = new Dimension(1024,768);
@@ -145,9 +152,11 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		
+		this.backgroundImg.paintIcon(this, g, 0, 
+				0);
+		
 		if(!GameOver&&!GameStart){
-			backgroundImg.paintIcon(this, g, backgroundSz.width, 
-									backgroundSz.height);
 			sh.getImage().paintIcon(this, g, sh.getX(), sh.getY());
 			for(int i =0;i<eindex;i++)
 				if(enemy[i].isAlive()){
@@ -183,8 +192,8 @@ public class GamePanel extends JPanel {
 			g.setColor(Color.white);
 			g.setFont(new Font("Verdana",Font.BOLD,12));
 			g.drawString(name, 0, 580);
-			g.drawString("Score: "+score, 260,30);
-			g.drawString("Level: "+currentLevel, 260, 580);
+			g.drawString("Score: "+score, this.backgroundSz.width/2,30);
+			g.drawString("Level: "+currentLevel, this.backgroundSz.width/2, 580);
 		}
 		else
 		{
@@ -198,7 +207,7 @@ public class GamePanel extends JPanel {
 				
 			}
 			if(GameStart)
-				g.drawString(BeginMessege, 300, 300);
+				g.drawString(BeginMessege, this.backgroundSz.width/2, this.backgroundSz.height/2);
 			else
 			{
 				g.drawString(LoseMessage, 220, 300);
