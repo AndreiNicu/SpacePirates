@@ -3,13 +3,15 @@
  * 
  */
 
-package main;
+package ship;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+
+import main.GamePanel;
 
 public class EnemyShip extends Ship{
 	private static ImageIcon enemyShip=new ImageIcon("image/enemy ships/2ndShipFirstPhase.PNG");

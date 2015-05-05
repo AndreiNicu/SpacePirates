@@ -2,7 +2,7 @@
  * Version 0.1
  */
 
-package main;
+package ship;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;

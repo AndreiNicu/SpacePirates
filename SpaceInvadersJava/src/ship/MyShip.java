@@ -2,9 +2,11 @@
  * Version 0.1
  */
 
-package main;
+package ship;
 
 import javax.swing.ImageIcon;
+
+import main.GamePanel;
 
 public class MyShip extends Ship {
 	

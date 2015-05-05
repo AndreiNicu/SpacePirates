@@ -24,6 +24,9 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import ship.EnemyShip;
+import ship.MyShip;
+
 public class GamePanel extends JPanel {
 	private MyShip sh;
 	private Timer bulletTime;
