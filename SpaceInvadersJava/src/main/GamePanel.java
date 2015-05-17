@@ -49,7 +49,7 @@ public class GamePanel extends JPanel {
 	private OutDialog outro;
 	private ImageIcon backgroundImg = new ImageIcon("image/back.PNG");
 	private String name;
-	private long score=0;
+	private long score=0; 
 	private static final Dimension backgroundSz = new Dimension(1024,768);
 	private boolean kLeft=false;
 	private boolean kRight=false;
