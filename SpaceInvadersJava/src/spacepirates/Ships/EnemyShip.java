@@ -3,7 +3,7 @@
  * 
  */
 
-package ship;
+package spacepirates.Ships;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -11,10 +11,13 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-import main.GamePanel;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import spacepirates.GameBoard.GamePanel;
 
 public class EnemyShip extends Ship{
-	private static ImageIcon enemyShip=new ImageIcon("image/enemy ships/2ndShipFirstPhase.PNG");
+	//private static Image enemyShip;
 	private int x,y;
 	private int imgX,imgY;
 	private int moveY, moveX;
@@ -23,10 +26,10 @@ public class EnemyShip extends Ship{
 	private Timer time;
 	private boolean FireMode;
 	private int ticker,limit;
-	public EnemyShip()
+	public EnemyShip() throws SlickException
 	{
-		super(enemyShip);
-		imgX = enemyShip.getIconWidth();imgY=enemyShip.getIconHeight();
+		super(new Image("image/enemy ships/2ndShipFirstPhase.PNG"));
+		imgX = getImage().getWidth();imgY=getImage().getHeight();
 		x=rand.nextInt(GamePanel.getBackgroundDimension().width-imgX);y=3;moveY=1;flightPattern(false);
 		time = new Timer(25,new TimeListener());
 		limit=400;
@@ -52,7 +55,7 @@ public class EnemyShip extends Ship{
 	public boolean isAlive(){return alive;}
 	public int getFireLimit(){return limit;}
 	/**
-	 * Checks if bullet has made collision with enemy ship
+	 * Checks if bullet has made collision with enemy spacepirates.Ships
 	 * @param xB X coordinates of the bullet
 	 * @param yB Y coordinates of the bullet
 	 * @return true if there is a collision
@@ -64,8 +67,8 @@ public class EnemyShip extends Ship{
 		return false;
 	}
 	/**
-	 * Checks if the enemy spawn ship overlaps with the rest.
-	 * @param e Other enemy ship for checking against recently spawned ship.
+	 * Checks if the enemy spawn spacepirates.Ships overlaps with the rest.
+	 * @param e Other enemy spacepirates.Ships for checking against recently spawned spacepirates.Ships.
 	 * @return	true if they overlap or false if they don't.
 	 */
 	public boolean checkIfOverlap(EnemyShip e)
@@ -79,7 +82,7 @@ public class EnemyShip extends Ship{
 	}
 	/**
 	 * This will set the flight pattern on the X axis. 
-	 * @param suddenChange true if ship should change its pattern due to limit
+	 * @param suddenChange true if spacepirates.Ships should change its pattern due to limit
 	 * 					   or pre-determined change situation.
 	 */
 	public void flightPattern(boolean suddenChange)
@@ -98,7 +101,7 @@ public class EnemyShip extends Ship{
 		public void actionPerformed(ActionEvent e) {
 			setY(getY()+getMoveY());
 			setX(getX()+getMoveX());
-			if(((x+enemyShip.getIconWidth())>= GamePanel.getBackgroundDimension().width)||x<=0) flightPattern(true);
+			if(((x+getImage().getWidth())>= GamePanel.getBackgroundDimension().width)||x<=0) flightPattern(true);
 			//with small problem of abrupt change of flight pattern (to be fixed)
 			//if(rand.nextInt(400)==ticker) setMoveX(getMoveX()*(-1));
 			if(ticker>=limit){ticker=0;setFireModeOn();}
@@ -107,13 +110,13 @@ public class EnemyShip extends Ship{
 		}
 	}
 	/**
-	 * Checks if enemy ship has reached end of screen, thus firing "you lose" message
+	 * Checks if enemy spacepirates.Ships has reached end of screen, thus firing "you lose" message
 	 * for the player.
 	 * @return true if it has reached end of screen.
 	 */
 	public boolean isGameOver()
 	{
-		if((y+enemyShip.getIconHeight())>=600) return true;
+		if((y+getImage().getHeight())>=600) return true;
 		return false;
 	}
 }

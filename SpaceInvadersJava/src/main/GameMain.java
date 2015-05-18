@@ -4,7 +4,10 @@
 
 package main;
 
-import javax.swing.JFrame;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
+import spacepirates.GameBoard.BoardDraw;
 
 public class GameMain {
 
@@ -12,12 +15,16 @@ public class GameMain {
 		//InDialog intro = new InDialog();
 		
 		String name ="Andrei";
-		
-		JFrame frame = new JFrame("Space Invaders");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new GamePanel(name));
-		frame.setVisible(true);
-		frame.pack();
+		System.out.println(name);
+		try{
+			AppGameContainer n;
+			n = new AppGameContainer(new BoardDraw("Simple",name));
+			n.setDisplayMode(1024, 720, false);
+			n.start();
+		}catch(SlickException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
 }

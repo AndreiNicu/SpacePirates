@@ -2,17 +2,26 @@
  * Version 0.1
  */
 
-package main;
+package spacepirates.Weapons;
 
 import javax.swing.ImageIcon;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 public class Bullet {
-	private static ImageIcon bullet = new ImageIcon("image/Bullet/bullet_small.PNG");
+	private static Image bullet; 
 	private int ammoy,ammoMoveY,ammox;
 	private boolean bulletInMotion=false;
 	private boolean friendlyFire;
 	public Bullet()
 	{
+		try {
+			bullet = new Image("image/Bullet/bullet_small.PNG");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ammoy=0;
 		ammox=0;
 		ammoMoveY=3;
@@ -29,7 +38,7 @@ public class Bullet {
 	public int getAmmoMoveY(){return ammoMoveY;}
 	public boolean getFireMotion(){return bulletInMotion;}
 	public boolean getFriendlyFire(){return friendlyFire;}
-	public ImageIcon getBullet(){return bullet;}
+	public Image getBullet(){return bullet;}
 	public void resetAmmo(int y){ammoy=y;}
 	
 	public void fireBullet()

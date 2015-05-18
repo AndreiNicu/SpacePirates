@@ -2,21 +2,24 @@
  * Version 0.1
  */
 
-package ship;
+package spacepirates.Ships;
 
 import javax.swing.ImageIcon;
 
-import main.GamePanel;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import spacepirates.GameBoard.GamePanel;
 
 public class MyShip extends Ship {
 	
-	private static ImageIcon ship=new ImageIcon("image/MyShip/ship.PNG");
 	private int x,y,moveX,life;
-	private final int ImageWidth=ship.getIconWidth(); 
-	public MyShip()
+	private int ImageWidth; 
+	public MyShip() throws SlickException
 	{
-		super(ship);
-		x=250;y=((GamePanel.getBackgroundDimension().height-100)-ship.getIconHeight());moveX=0;
+		super(new Image("image/MyShip/ship.PNG"));
+		ImageWidth = getImage().getWidth();
+		x=250;y=((GamePanel.getBackgroundDimension().height-100)-getImage().getHeight());moveX=0;
 		life=3;
 	}
 	public void setX(int x){this.x=x;}
@@ -29,7 +32,7 @@ public class MyShip extends Ship {
 	public int getLife(){return life;}
 	public boolean isColision(int xB, int yB)
 	{
-		if((xB+11)>=(x)&&(xB+11)<=(x+ship.getIconWidth())&&(yB-9)>=(y-10))
+		if((xB+11)>=(x)&&(xB+11)<=(x+getImage().getWidth())&&(yB-9)>=(y-10))
 			return true;
 		return false;
 	}

@@ -2,7 +2,7 @@
  * Version 0.1
  */
 
-package main;
+package spacepirates.GameBoard;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,8 +24,12 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import ship.EnemyShip;
-import ship.MyShip;
+import org.newdawn.slick.SlickException;
+
+import main.OutDialog;
+import spacepirates.Ships.EnemyShip;
+import spacepirates.Ships.MyShip;
+import spacepirates.Weapons.Bullet;
 
 public class GamePanel extends JPanel {
 	private MyShip sh;
@@ -58,14 +62,18 @@ public class GamePanel extends JPanel {
 	private boolean isPlayerFireReady=false;
 	public GamePanel(String name)
 	{
-		sh =new MyShip();
+		try {
+			sh =new MyShip();
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		bulletTime = new Timer(10,new TimeListner());
 		bullet = new Bullet[8];
 		fire = false;
 		enemy = new EnemyShip[8];
 		GameOver=false;
 		GameStart=true;
-		if(name.equalsIgnoreCase("Tobias")) fireSecret=true;
 		currentLevel=1;
 		nextLevel=2;
 		setPreferredSize(backgroundSz);
@@ -106,8 +114,8 @@ public class GamePanel extends JPanel {
 	{
 		int k=0;
 		while(k<i){
-			//System.out.println("Spawn ship"+ " "+enemy[i].getX()+" "+k);
-			//System.out.println("Overlap ship "+enemy[k].getX()+" "+k);
+			//System.out.println("Spawn spacepirates.Ships"+ " "+enemy[i].getX()+" "+k);
+			//System.out.println("Overlap spacepirates.Ships "+enemy[k].getX()+" "+k);
 				if(e.checkIfOverlap(enemy[k])){
 					enemy[eindex].setRandomPosX();
 					e=enemy[eindex];
@@ -118,7 +126,12 @@ public class GamePanel extends JPanel {
 	}
 	public void spawnShip(boolean flag){
 		for(int i=0;i<3;i++){
-			enemy[eindex]= new EnemyShip();
+			try {
+				enemy[eindex]= new EnemyShip();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			enemy[eindex].setFireLimit(fireSpeed);
 			if(flag)enemy[eindex].setFireModeOn();
 			if(i>=1) overlapingEnemy(i, enemy[eindex]);
@@ -233,7 +246,7 @@ public class GamePanel extends JPanel {
 		}
 	}
 	/*
-	 * Please note that i have moved the ship movement in here. Some tweaks are required
+	 * Please note that i have moved the spacepirates.Ships movement in here. Some tweaks are required
 	 * to achieve good performance 
 	 */
 	private void shipMovement()
