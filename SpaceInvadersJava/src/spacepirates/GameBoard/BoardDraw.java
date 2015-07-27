@@ -1,11 +1,14 @@
 package spacepirates.GameBoard;
 
+import inputhandler.KeyboardInput;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
 import org.lwjgl.util.Dimension;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -14,6 +17,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.command.Command;
+import org.newdawn.slick.command.InputProvider;
+import org.newdawn.slick.command.InputProviderListener;
+import org.newdawn.slick.command.KeyControl;
 
 import spacepirates.Ships.EnemyShip;
 import spacepirates.Ships.MyShip;
@@ -21,6 +28,7 @@ import spacepirates.Weapons.Bullet;
 
 public class BoardDraw extends BasicGame{
 	private MyShip sh;
+	private Animation fps;
 	private EnemyShip[] enemy;
 	private Bullet[] bullet;
 	private Timer bulletTime;
@@ -43,9 +51,10 @@ public class BoardDraw extends BasicGame{
 	private int tick=0;
 	private long score=0; 
 	private Image back;
+	private InputProvider input;
 	private Dimension backgroundSz;
 	private String name;
-	
+	private KeyboardInput kbInputListener;
 	public BoardDraw(String title, String name) {
 		super(title);
 		this.name = name;
@@ -196,6 +205,7 @@ public class BoardDraw extends BasicGame{
 	@Override
 	public void render(GameContainer gamePanel, Graphics g) throws SlickException {
 		g.drawImage(back, 0, 0) ;
+		System.out.println("Drawing ships");
 		if(!GameOver&&!GameStart){
 			g.drawImage(sh.getImage(), sh.getX(), sh.getY());
 			for(int i =0;i<eindex;i++)
@@ -267,59 +277,34 @@ public class BoardDraw extends BasicGame{
 		fire = false;
 		enemy = new EnemyShip[8];
 		GameOver=false;
-		GameStart=true;
+		GameStart=false;
 		currentLevel=1;
 		nextLevel=2;
 		fireSpeed=0;
 		threshold=500;
 		gamePanel.setFullscreen(false);
+		kbInputListener = new KeyboardInput(sh, back.getWidth(), true);
+		input = new InputProvider(gamePanel.getInput());
+		input.setActive(true);
+		System.out.println("This is a test for input");
+		//fps = new Animation(true);
+		//fps.start();
+		input.addListener(kbInputListener);
+		input.bindCommand(new KeyControl(Input.KEY_LEFT), kbInputListener.getMoveLeft());
+		input.bindCommand(new KeyControl(Input.KEY_RIGHT), kbInputListener.getMoveRight());
+		input.bindCommand(new KeyControl(Input.KEY_SPACE), kbInputListener.getFire());
+		
 		//gamePanel.set
 	}
 
 	@Override
 	public void update(GameContainer gamePanel, int n) throws SlickException {
-		// TODO Auto-generated method stub
+		System.out.println("Update panel");
+		//TODO please use n as tick control for spam fire
+		//input.isCommandControlDown()
 		
 	}
-	private class KeyboardListner implements KeyListener{
-
-		@Override
-		public void inputEnded() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void inputStarted() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public boolean isAcceptingInput() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void setInput(Input arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void keyPressed(int arg0, char arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void keyReleased(int arg0, char arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
+	
 	private class TimeListner implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			for(int i=0;i<=bindex;i++)
