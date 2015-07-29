@@ -18,7 +18,7 @@ public class GameMain {
 		System.out.println(name);
 		try{
 			AppGameContainer n;
-			n = new AppGameContainer(new BoardDraw("Simple",name));
+			n = new AppGameContainer(new BoardDraw("SpacePirates",name));
 			n.setDisplayMode(1024, 720, false);
 			n.start();
 		}catch(SlickException ex)

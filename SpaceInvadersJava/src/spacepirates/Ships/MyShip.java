@@ -13,13 +13,16 @@ import spacepirates.GameBoard.GamePanel;
 
 public class MyShip extends Ship {
 	
-	private int x,y,moveX,life;
+	private int life;
 	private int ImageWidth; 
 	public MyShip() throws SlickException
 	{
-		super(new Image("image/MyShip/ship.PNG"));
+		super(new Image("image/MyShip/alt.png"));
+		setX(250);
+		setY(((GamePanel.getBackgroundDimension().height-100)
+						-getImage().getHeight()));
 		ImageWidth = getImage().getWidth();
-		x=250;y=((GamePanel.getBackgroundDimension().height-100)-getImage().getHeight());moveX=0;
+		setMoveX(3);
 		life=3;
 	}
 	public void setX(int x){this.x=x;}
